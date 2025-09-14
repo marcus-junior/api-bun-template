@@ -2,11 +2,6 @@ import { Elysia, t } from "elysia";
 import { openapi } from '@elysiajs/openapi'
 import { cors } from '@elysiajs/cors'
 import db from "./db/connection";
-import { usersTable } from "./db/schema";
-
-db.select().from(usersTable).then(users => {
-  console.log('Users:', users);
-});
 
 const app = new Elysia({
   prefix: '/api',
@@ -24,6 +19,7 @@ const app = new Elysia({
       }
     })
   )
+  .decorate('db', db)
   .post(
     '/user',
     ({ body }) => {
