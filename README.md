@@ -25,7 +25,7 @@ O GS App é uma aplicação full-stack que demonstra a integração entre:
 
 ### Backend (API)
 - **[Elysia.js](https://elysiajs.com/)** - Framework web ultrarrápido para Bun
-- **[@elysiajs/openapi](https://elysiajs.com/plugins/swagger)** - Documentação automática da API
+- **[@elysiajs/openapi](https://elysiajs.com/plugins/openapi.html)** - Documentação automática da API
 - **[@elysiajs/cors](https://elysiajs.com/plugins/cors)** - Configuração de CORS
 - **TypeScript** - Tipagem estática
 - **Bun Runtime** - Runtime JavaScript de alta performance
@@ -106,7 +106,7 @@ npm run dev
 ```
 - **API**: http://localhost:3000
 - **UI**: http://localhost:5173
-- **Documentação da API**: http://localhost:3000/swagger
+- **Documentação da API**: http://localhost:3000/api/openapi
 
 ### Iniciar apenas a API
 ```bash
