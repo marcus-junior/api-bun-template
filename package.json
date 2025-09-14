@@ -1,0 +1,19 @@
+{
+  "name": "gs_app",
+  "version": "0.0.0",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev:api": "cd packages/api && npx bun run --watch src/index.ts",
+    "dev:ui": "cd packages/ui && npx vite",
+    "dev": "npm run dev:api & npm run dev:ui"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
