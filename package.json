@@ -8,7 +8,12 @@
   "scripts": {
     "dev:api": "cd packages/api && npx bun run --watch src/index.ts",
     "dev:ui": "cd packages/ui && npx vite",
-    "dev": "npm run dev:api & npm run dev:ui"
+    "dev": "npm run dev:api & npm run dev:ui",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:restart": "docker compose restart",
+    "docker:clean": "docker compose down -v --remove-orphans"
   },
   "devDependencies": {
     "@types/bun": "latest"
