@@ -1,7 +1,22 @@
-import { Elysia, t } from "elysia";
+import { Context, Elysia, t } from "elysia";
 import { openapi } from '@elysiajs/openapi'
 import { cors } from '@elysiajs/cors'
 import db from "./db/connection";
+import { auth } from "./auth";
+
+const betterAuthView = (context: Context) => {
+
+  console.log("Request Method:", context.request.method);
+
+    const BETTER_AUTH_ACCEPT_METHODS = ["POST", "GET"]
+    // validate request method
+    if(BETTER_AUTH_ACCEPT_METHODS.includes(context.request.method)) {
+        return auth.handler(context.request);
+    } else {
+        context.status(405);
+        return { error: "Method Not Allowed" };
+    }
+}
 
 const app = new Elysia({
   prefix: '/api',
@@ -20,6 +35,7 @@ const app = new Elysia({
     })
   )
   .decorate('db', db)
+  .all("/auth/*", betterAuthView)
   .post(
     '/user',
     ({ body }) => {
