@@ -3,6 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import db from "./db/connection";
 
 import { schema } from "./db/schema";
+import { createAuthMiddleware } from "better-auth/api";
 
 export const auth = betterAuth({
     secret: process.env.BETTER_AUTH_SECRET!,
@@ -17,8 +18,26 @@ export const auth = betterAuth({
            /* prompt: "select_account",*/
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            redirectURI: "http://localhost:3000/api/auth/callback/google",
         },
     },
     trustedOrigins: ["http://localhost:5173"],
+    advanced: {
+        ipAddress: {
+			ipAddressHeaders: ["x-client-ip", "x-forwarded-for"],
+			disableIpTracking: true
+		},
+    },
+    hooks: {
+		before: createAuthMiddleware(async (ctx) => {
+			// Execute before processing the request
+			console.log("Request path:", ctx.path);
+		}),
+		after: createAuthMiddleware(async (ctx) => {
+			// Execute after processing the request
+			console.log("Response:", ctx.context.returned);
+		})
+	},
+
 });
 
